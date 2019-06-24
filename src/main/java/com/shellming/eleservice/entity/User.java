@@ -1,10 +1,13 @@
 package com.shellming.eleservice.entity;
 
+import javax.validation.constraints.NotEmpty;
+import java.io.Serializable;
 import java.util.Date;
 
-public class User {
+public class User implements Serializable {
     private String user_id;
 
+    @NotEmpty(message = "用户名不能为空")
     private String user_name;
 
     private String password;
