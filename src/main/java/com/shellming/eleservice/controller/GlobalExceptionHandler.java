@@ -137,12 +137,7 @@ public class GlobalExceptionHandler {
         String msg = Objects.toString(request.getAttribute("msg"), "出错啦");
         String code = Objects.toString(request.getAttribute("code"), null);
         // 如果有指定 code，则按 code 返回
-        if (StringUtils.isNumeric(code)) {
-            return new ResultBean<>(Integer.parseInt(code), msg);
-        } else {
-            // 否则视为未知异常
-            return ResultBean.unknownError(msg);
-        }
+        return new ResultBean<>(code, msg);
     }
 
     /**

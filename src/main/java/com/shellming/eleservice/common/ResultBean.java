@@ -15,11 +15,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @ApiModel(description = "返回结果")
 public class ResultBean<T> {
-    public static final int FAIL = 1;
-    public static final int SUCCESS = 1;
-    public static final int UNKNOWN_ERROR = -1;
+    public static final String FAIL = "-1";
+    public static final String SUCCESS = "0000";
+    public static final String UNKNOWN_ERROR = "-9999";
     @ApiModelProperty(value = "处理结果code，0 表示成功，非零表示失败", notes = "正数表示已知错误，负数表示未知异常")
-    private int code;
+    private String code;
     @ApiModelProperty("错误信息，一般只在处理失败时才有")
     private String msg;
     @ApiModelProperty("结果数据")
@@ -37,13 +37,13 @@ public class ResultBean<T> {
         return new ResultBean<>(UNKNOWN_ERROR, msg);
     }
 
-    public ResultBean(int code, String msg, T data) {
+    public ResultBean(String code, String msg, T data) {
         this.code = code;
         this.msg = msg;
         this.data = data;
     }
 
-    public ResultBean(int code, String msg) {
+    public ResultBean(String code, String msg) {
         this.code = code;
         this.msg = msg;
     }
