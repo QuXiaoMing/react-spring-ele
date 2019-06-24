@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shellming.eleservice.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.shellming.eleservice.entity.User">
+    <id column="user_id" jdbcType="VARCHAR" property="user_id" />
+    <result column="user_name" jdbcType="VARCHAR" property="user_name" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="order_status" jdbcType="VARCHAR" property="order_status" />
+    <result column="create_at" jdbcType="TIMESTAMP" property="create_at" />
+    <result column="update_at" jdbcType="TIMESTAMP" property="update_at" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    user_id, user_name, password, sex, type, order_status, create_at, update_at
+  </sql>
+  <select id="list" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where 1=1
+    <if test="user_id != null">
+      and user_id = #{user_id,jdbcType=VARCHAR}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where user_id = #{user_id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from user
+    where user_id = #{user_id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.shellming.eleservice.entity.User">
+    insert into user (user_id, user_name, password, 
+      sex, type, order_status, 
+      create_at, update_at)
+    values (#{user_id,jdbcType=VARCHAR}, #{user_name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{order_status,jdbcType=VARCHAR}, 
+      #{create_at,jdbcType=TIMESTAMP}, #{update_at,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.shellming.eleservice.entity.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="user_id != null">
+        user_id,
+      </if>
+      <if test="user_name != null">
+        user_name,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="order_status != null">
+        order_status,
+      </if>
+      <if test="create_at != null">
+        create_at,
+      </if>
+      <if test="update_at != null">
+        update_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="user_id != null">
+        #{user_id,jdbcType=VARCHAR},
+      </if>
+      <if test="user_name != null">
+        #{user_name,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="order_status != null">
+        #{order_status,jdbcType=VARCHAR},
+      </if>
+      <if test="create_at != null">
+        #{create_at,jdbcType=TIMESTAMP},
+      </if>
+      <if test="update_at != null">
+        #{update_at,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shellming.eleservice.entity.User">
+    update user
+    <set>
+      <if test="user_name != null">
+        user_name = #{user_name,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="order_status != null">
+        order_status = #{order_status,jdbcType=VARCHAR},
+      </if>
+      <if test="create_at != null">
+        create_at = #{create_at,jdbcType=TIMESTAMP},
+      </if>
+      <if test="update_at != null">
+        update_at = #{update_at,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where user_id = #{user_id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shellming.eleservice.entity.User">
+    update user
+    set user_name = #{user_name,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      order_status = #{order_status,jdbcType=VARCHAR},
+      create_at = #{create_at,jdbcType=TIMESTAMP},
+      update_at = #{update_at,jdbcType=TIMESTAMP}
+    where user_id = #{user_id,jdbcType=VARCHAR}
+  </update>
+</mapper>
