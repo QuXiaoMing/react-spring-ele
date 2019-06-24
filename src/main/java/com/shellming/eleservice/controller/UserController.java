@@ -1,5 +1,7 @@
 package com.shellming.eleservice.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.shellming.eleservice.common.ResultBean;
 import com.shellming.eleservice.entity.User;
 import com.shellming.eleservice.service.IUserService;
@@ -25,11 +27,15 @@ public class UserController{
     @ApiOperation(value = "用户列表" ,  notes="查询用户列表")
     @RequestMapping(value = "", method = RequestMethod.GET)
     public ResultBean getUserList(@RequestParam(defaultValue = "0") int pageNum, @RequestParam(defaultValue = "10") int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
         Log.info("获取用户列表");
         Map map = new HashMap();
         map.put("pageNum", pageNum);
         map.put("pageSize", pageSize);
-        return ResultBean.success(userService.list(map));
+
+        List<User> userList = userService.list(map);
+        PageInfo<User> result = new PageInfo<>(userList);
+        return ResultBean.success(result);
     }
 
     @ApiOperation(value = "创建用户" ,  notes="创建用户")
