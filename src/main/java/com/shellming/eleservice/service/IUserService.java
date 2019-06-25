@@ -8,4 +8,8 @@ import java.util.Map;
 public interface IUserService {
     List<User> list(Map map);
     int create(User map);
+
+    User getUserById(String id);
+
+    int updateByPrimaryKeySelective(User user);
 }

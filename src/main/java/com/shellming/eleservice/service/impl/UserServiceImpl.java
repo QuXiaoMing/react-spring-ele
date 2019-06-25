@@ -29,4 +29,14 @@ public class UserServiceImpl implements IUserService {
         System.out.println("ret" + ret);
         return ret;
     }
+
+    @Override
+    public User getUserById(String id) {
+        return userMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public int updateByPrimaryKeySelective(User user) {
+        return userMapper.updateByPrimaryKeySelective(user);
+    }
 }
