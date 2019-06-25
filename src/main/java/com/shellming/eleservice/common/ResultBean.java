@@ -4,6 +4,9 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  * 统一返回结果
@@ -25,12 +28,21 @@ public class ResultBean<T> {
     @ApiModelProperty("结果数据")
     private T data;
 
+    @Override
+    public String toString() {
+        return ReflectionToStringBuilder.toString(this, ToStringStyle.JSON_STYLE);
+    }
+
     public static <T> ResultBean<T> success(T data) {
         return new ResultBean<>(SUCCESS, "成功", data);
     }
 
     public static <T> ResultBean<T> fail(String msg) {
         return new ResultBean<>(FAIL, msg);
+    }
+
+    public static <T> ResultBean<T> fail(String code, String msg) {
+        return new ResultBean<>(code, msg);
     }
 
     public static <T> ResultBean<T> unknownError(String msg) {

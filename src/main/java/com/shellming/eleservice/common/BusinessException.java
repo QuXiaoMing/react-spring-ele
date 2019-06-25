@@ -6,7 +6,7 @@ package com.shellming.eleservice.common;
  * @author dadiyang
  * @since 2019-06-02
  */
-public class BusinessException extends RuntimeException {
+public class BusinessException extends Exception {
     public BusinessException(String message) {
         super(message);
     }
