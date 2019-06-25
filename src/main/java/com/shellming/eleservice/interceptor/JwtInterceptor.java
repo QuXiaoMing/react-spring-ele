@@ -30,6 +30,12 @@ public class JwtInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
                              Object handler) throws Exception {
 
+        // 鉴权白名单
+        String uri = request.getRequestURI().toString();
+        if (JwtConstant.isIgnoreUri(uri)) {
+            return true;
+        }
+
         // 忽略带JwtIgnore注解的请求, 不做后续token认证校验
         if (handler instanceof HandlerMethod) {
             HandlerMethod handlerMethod = (HandlerMethod) handler;
