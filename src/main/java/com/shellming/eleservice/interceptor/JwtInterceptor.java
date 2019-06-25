@@ -49,7 +49,7 @@ public class JwtInterceptor implements HandlerInterceptor {
         if (StringUtils.isEmpty(authHeader)) {
             // TODO 这里自行抛出异常
             log.info("===== 用户未登录, 请先登录 =====");
-            response.getOutputStream().write(ResultBean.fail("401", "未登陆").toString().getBytes());
+            this.sendResult(response,"401", "未登陆");
             return false;
         }
 
@@ -57,6 +57,7 @@ public class JwtInterceptor implements HandlerInterceptor {
         if (!JwtUtils.validate(authHeader)) {
             // TODO 这里自行抛出异常
             log.info("===== token格式异常 =====");
+            this.sendResult(response,"401", "token格式异常");
             return false;
         }
 
@@ -65,12 +66,21 @@ public class JwtInterceptor implements HandlerInterceptor {
         Claims claims = JwtUtils.parseToken(authToken, jwtParam.getBase64Secret());
         if (claims == null) {
             log.info("===== token解析异常 =====");
+            this.sendResult(response,"401", "token解析异常");
             return false;
         }
 
         // 传递所需信息
         request.setAttribute("CLAIMS", claims);
         return true;
+    }
+
+    private void sendResult(HttpServletResponse response, String code, String message) {
+        try {
+            response.getOutputStream().write(ResultBean.fail(code, message).toString().getBytes());
+        } catch (Exception e) {
+            log.error("sendResult{}", e);
+        }
     }
 
     @Override
