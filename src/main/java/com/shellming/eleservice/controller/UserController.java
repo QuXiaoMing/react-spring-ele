@@ -24,6 +24,15 @@ public class UserController{
     @Autowired
     private IUserService userService;
 
+    @ApiOperation(value = "获取用户信息" ,  notes="获取用户信息")
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResultBean getUserList(@PathVariable("id") String id) {
+        Log.info("获取用户信息" + id);
+        User user = userService.getUserById(id);
+        Log.info("获取用户信息{}", user);
+        return ResultBean.success(user);
+    }
+
     @ApiOperation(value = "用户列表" ,  notes="查询用户列表")
     @RequestMapping(value = "", method = RequestMethod.GET)
     public ResultBean getUserList(@RequestParam(defaultValue = "0") int pageNum, @RequestParam(defaultValue = "10") int pageSize) {
@@ -53,5 +62,23 @@ public class UserController{
         }
         Log.info("创建结果{}", ret);
         throw new Exception("创建失败");
+    }
+
+    @ApiOperation(value = "设置用户角色" ,  notes="设置用户角色")
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public ResultBean<?> setRoles(@PathVariable("id") String id,@RequestParam("roles") String rolse) throws Exception {
+        User user = userService.getUserById(id);
+        if (user == null) {
+            return ResultBean.fail("用户不存在");
+        }
+        Log.info("设置用户角色{},{}", user.toString(), rolse);
+        user.setRoles(rolse);
+
+        int ret = userService.updateByPrimaryKeySelective(user);
+        Log.info("设置用户角色{}", ret);
+        if (ret > 0) {
+            return ResultBean.success(ret);
+        }
+        throw new Exception("设置失败");
     }
 }
