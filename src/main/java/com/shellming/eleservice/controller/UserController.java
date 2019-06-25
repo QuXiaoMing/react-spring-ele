@@ -35,6 +35,7 @@ public class UserController{
 
         List<User> userList = userService.list(map);
         PageInfo<User> result = new PageInfo<>(userList);
+        Log.info("获取用户列表{}", userList);
         return ResultBean.success(result);
     }
 

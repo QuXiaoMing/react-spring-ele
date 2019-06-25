@@ -10,13 +10,13 @@ public class User implements Serializable {
     @NotEmpty(message = "用户名不能为空")
     private String user_name;
 
+    @NotEmpty(message = "密码不能为空")
     private String password;
 
+    @NotEmpty(message = "性别不能为空")
     private String sex;
 
     private String type;
-
-    private String order_status;
 
     private Date create_at;
 
@@ -60,14 +60,6 @@ public class User implements Serializable {
 
     public void setType(String type) {
         this.type = type == null ? null : type.trim();
-    }
-
-    public String getOrder_status() {
-        return order_status;
-    }
-
-    public void setOrder_status(String order_status) {
-        this.order_status = order_status == null ? null : order_status.trim();
     }
 
     public Date getCreate_at() {
