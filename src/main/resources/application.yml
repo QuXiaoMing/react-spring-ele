@@ -28,3 +28,12 @@ pagehelper:
   reasonable: true
   support-methods-arguments: true
   params: count=countSql
+
+# JWT 604800
+#jwt.header:Authorization
+#jwt.secret:mySecret
+#jwt.expiration:604800
+#jwt.tokenHead:Bearer
+#jwt.route.authentication.path:auth/login
+#jwt.route.authentication.refresh:auth/refresh
+#jwt.route.authentication.register:"auth/register"

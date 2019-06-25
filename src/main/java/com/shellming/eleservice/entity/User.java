@@ -1,10 +1,16 @@
 package com.shellming.eleservice.entity;
 
-import javax.validation.constraints.NotEmpty;
-import java.io.Serializable;
-import java.util.Date;
+//import org.springframework.security.core.GrantedAuthority;
+//import org.springframework.security.core.authority.SimpleGrantedAuthority;
+//import org.springframework.security.core.userdetails.UserDetails;
 
-public class User implements Serializable {
+import javax.validation.constraints.NotEmpty;
+//import java.util.ArrayList;
+//import java.util.Collection;
+import java.util.Date;
+import java.util.List;
+
+public class User {
     private String user_id;
 
     @NotEmpty(message = "用户名不能为空")
@@ -16,11 +22,61 @@ public class User implements Serializable {
     @NotEmpty(message = "性别不能为空")
     private String sex;
 
+    private String roles;
+
     private String type;
 
     private Date create_at;
 
     private Date update_at;
+
+//    @Override
+//    public Collection<? extends GrantedAuthority> getAuthorities() {
+//        List<GrantedAuthority> auths = new ArrayList<>();
+//        List<Role> roles = this.getRoles();
+//        for (Role role : roles) {
+//            auths.add(new SimpleGrantedAuthority(role.getName()));
+//        }
+//        return auths;
+//    }
+//
+//    @Override
+    public String getPassword() {
+        return this.password;
+    }
+//
+//    @Override
+//    public String getUsername() {
+//        return this.user_name;
+//    }
+//
+//    @Override
+//    public boolean isAccountNonExpired() {
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean isAccountNonLocked() {
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean isCredentialsNonExpired() {
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean isEnabled() {
+//        return true;
+//    }
+
+    public String getRoles() {
+        return roles;
+    }
+
+    public void setRoles(String roles) {
+        this.roles = roles;
+    }
 
     public String getUser_id() {
         return user_id;
@@ -36,10 +92,6 @@ public class User implements Serializable {
 
     public void setUser_name(String user_name) {
         this.user_name = user_name == null ? null : user_name.trim();
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public void setPassword(String password) {

@@ -17,20 +17,12 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/`manager` /*!40100 DEFAULT CHARACTER SET
 
 USE `ele`;
 
-/*Table structure for table `order_t` */
+DROP TABLE IF EXISTS `role`;
 
-DROP TABLE IF EXISTS `user`;
-
-CREATE TABLE `user` (
-  `user_id` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT '用户ID',
-  `user_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT '用户名称',
-  `password` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT '用户密码',
-  `sex` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT '用户性别，0：男、1：女',
-  `type` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT '用户类型,ADMIN:管理员,NORMAL:普通用户',
-  `roles` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT '角色',
-  `create_at` datetime DEFAULT NULL COMMENT '创建时间',
-  `update_at` datetime DEFAULT NULL COMMENT '更新时间',
-  PRIMARY KEY (`user_id`)
+CREATE TABLE `role` (
+                        `id` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT '角色ID',
+                        `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT '角色名称',
+                        PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
