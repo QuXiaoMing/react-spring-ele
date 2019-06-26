@@ -1,4 +1,4 @@
-package com.shellming.eleservice.controller;
+package com.shellming.eleservice.common;
 
 import com.shellming.eleservice.common.BusinessException;
 import com.shellming.eleservice.common.ResultBean;

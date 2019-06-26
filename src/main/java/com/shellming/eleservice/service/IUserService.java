@@ -11,5 +11,7 @@ public interface IUserService {
 
     User getUserById(String id);
 
+    User getUserByUserName(String userName);
+
     int updateByPrimaryKeySelective(User user);
 }

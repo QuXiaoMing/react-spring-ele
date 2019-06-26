@@ -4,6 +4,7 @@ import com.shellming.eleservice.common.BusinessException;
 import com.shellming.eleservice.common.ResultBean;
 import com.shellming.eleservice.config.JwtParam;
 import com.shellming.eleservice.constant.JwtConstant;
+import com.shellming.eleservice.entity.User;
 import com.shellming.eleservice.service.JwtIgnore;
 import com.shellming.eleservice.util.JwtUtils;
 import io.jsonwebtoken.Claims;
@@ -11,6 +12,7 @@ import io.swagger.models.HttpMethod;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.util.StringUtils;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -22,6 +24,9 @@ import javax.servlet.http.HttpServletResponse;
 public class JwtInterceptor implements HandlerInterceptor {
 
     Logger log = LoggerFactory.getLogger(JwtInterceptor.class);
+
+    @Autowired
+    RedisTemplate redisTemplate;
 
     @Autowired
     private JwtParam jwtParam;
@@ -69,6 +74,14 @@ public class JwtInterceptor implements HandlerInterceptor {
 
         // token解析
         final String authToken = JwtUtils.getRawToken(authHeader);
+        log.info("authToken" + authToken);
+        // 判断是否过期
+        User user = (User) redisTemplate.opsForValue().get(JwtConstant.AUTH_HEADER_KEY + authToken);
+        if (user == null) {
+            log.info("获取用户信息失败");
+            this.sendResult(response,"401", "未登录");
+            return false;
+        }
         Claims claims = JwtUtils.parseToken(authToken, jwtParam.getBase64Secret());
         if (claims == null) {
             log.info("===== token解析异常 =====");

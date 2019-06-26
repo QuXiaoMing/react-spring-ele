@@ -4,6 +4,8 @@ package com.shellming.eleservice.entity;
 //import org.springframework.security.core.authority.SimpleGrantedAuthority;
 //import org.springframework.security.core.userdetails.UserDetails;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+
 import javax.validation.constraints.NotEmpty;
 //import java.util.ArrayList;
 //import java.util.Collection;
@@ -30,7 +32,12 @@ public class User {
 
     private Date update_at;
 
-//    @Override
+    @Override
+    public String toString() {
+        return ReflectionToStringBuilder.toString(this);
+    }
+
+    //    @Override
 //    public Collection<? extends GrantedAuthority> getAuthorities() {
 //        List<GrantedAuthority> auths = new ArrayList<>();
 //        List<Role> roles = this.getRoles();
