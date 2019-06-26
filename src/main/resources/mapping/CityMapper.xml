@@ -5,6 +5,7 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="abbr" jdbcType="VARCHAR" property="abbr" />
+    <result column="key" jdbcType="VARCHAR" property="key" />
     <result column="area_code" jdbcType="VARCHAR" property="area_code" />
     <result column="sort" jdbcType="INTEGER" property="sort" />
     <result column="latitude" jdbcType="DOUBLE" property="latitude" />
@@ -13,7 +14,7 @@
     <result column="pinyin" jdbcType="BIT" property="pinyin" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, name, abbr, area_code, sort, latitude, longitude, is_map, pinyin
+    id, name, abbr, key, area_code, sort, latitude, longitude, is_map, pinyin
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -29,12 +30,12 @@
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into city (name, abbr, area_code, 
-      sort, latitude, longitude, 
-      is_map, pinyin)
-    values (#{name,jdbcType=VARCHAR}, #{abbr,jdbcType=VARCHAR}, #{area_code,jdbcType=VARCHAR}, 
-      #{sort,jdbcType=INTEGER}, #{latitude,jdbcType=DOUBLE}, #{longitude,jdbcType=DOUBLE}, 
-      #{is_map,jdbcType=BIT}, #{pinyin,jdbcType=BIT})
+    insert into city (name, abbr, key, 
+      area_code, sort, latitude, 
+      longitude, is_map, pinyin)
+    values (#{name,jdbcType=VARCHAR}, #{abbr,jdbcType=VARCHAR}, #{key,jdbcType=VARCHAR}, 
+      #{area_code,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, #{latitude,jdbcType=DOUBLE}, 
+      #{longitude,jdbcType=DOUBLE}, #{is_map,jdbcType=BIT}, #{pinyin,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="com.shellming.eleservice.entity.City">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -47,6 +48,9 @@
       </if>
       <if test="abbr != null">
         abbr,
+      </if>
+      <if test="key != null">
+        key,
       </if>
       <if test="area_code != null">
         area_code,
@@ -73,6 +77,9 @@
       </if>
       <if test="abbr != null">
         #{abbr,jdbcType=VARCHAR},
+      </if>
+      <if test="key != null">
+        #{key,jdbcType=VARCHAR},
       </if>
       <if test="area_code != null">
         #{area_code,jdbcType=VARCHAR},
@@ -103,6 +110,9 @@
       <if test="abbr != null">
         abbr = #{abbr,jdbcType=VARCHAR},
       </if>
+      <if test="key != null">
+        key = #{key,jdbcType=VARCHAR},
+      </if>
       <if test="area_code != null">
         area_code = #{area_code,jdbcType=VARCHAR},
       </if>
@@ -128,6 +138,7 @@
     update city
     set name = #{name,jdbcType=VARCHAR},
       abbr = #{abbr,jdbcType=VARCHAR},
+      key = #{key,jdbcType=VARCHAR},
       area_code = #{area_code,jdbcType=VARCHAR},
       sort = #{sort,jdbcType=INTEGER},
       latitude = #{latitude,jdbcType=DOUBLE},

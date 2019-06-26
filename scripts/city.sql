@@ -23,6 +23,7 @@ CREATE TABLE `city` (
                         `id` integer (11) COLLATE utf8_unicode_ci NOT NULL COMMENT 'id',
                         `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT '名称',
                         `abbr` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT 'abbr',
+                        `key` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT 'key',
                         `area_code` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT 'area_code',
                         `sort` integer(11) COLLATE utf8_unicode_ci NOT NULL COMMENT 'sort',
                         `latitude` double COLLATE utf8_unicode_ci NOT NULL COMMENT 'latitude',
