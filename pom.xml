@@ -94,6 +94,21 @@
 			<artifactId>commons-pool2</artifactId>
 			<version>2.6.2</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/commons-io/commons-io 文件工具类 -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.6</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/net.sf.json-lib/json-lib -->
+		<dependency>
+			<groupId>net.sf.json-lib</groupId>
+			<artifactId>json-lib</artifactId>
+			<version>2.4</version>
+			<classifier>jdk15</classifier>
+		</dependency>
+
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -144,6 +159,7 @@
 					<include>**/*.yml</include>
 					<include>**/*.properties</include>
 					<include>**/*.xml</include>
+					<include>**/*.json</include>
 				</includes>
 				<filtering>false</filtering>
 			</resource>
@@ -152,6 +168,7 @@
 				<includes>
 					<include>**/*.yml</include>
 					<include>**/*.properties</include>
+					<include>**/*.json</include>
 					<include>**/*.xml</include>
 				</includes>
 				<filtering>false</filtering>

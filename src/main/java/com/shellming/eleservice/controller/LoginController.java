@@ -7,6 +7,7 @@ import com.shellming.eleservice.entity.User;
 import com.shellming.eleservice.service.JwtIgnore;
 import com.shellming.eleservice.service.impl.UserServiceImpl;
 import com.shellming.eleservice.util.JwtUtils;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @Slf4j
 @RestController
+@Api(description = "登录接口")
 public class LoginController {
 
     @Autowired
