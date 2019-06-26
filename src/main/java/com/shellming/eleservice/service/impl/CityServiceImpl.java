@@ -31,6 +31,11 @@ public class CityServiceImpl implements ICityService {
     }
 
     @Override
+    public City selectByPrimaryKey(Integer id) {
+        return cityMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
     public int loadCityData() {
         log.info("加载城市JSON数据");
         int count = 0;

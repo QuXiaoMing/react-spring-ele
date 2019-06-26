@@ -8,10 +8,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("city")
@@ -28,6 +25,15 @@ public class CityController {
     public ResultBean list() {
         int cout = cityService.loadCityData();
         return ResultBean.success(cout);
+    }
+
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @ApiOperation("获取城市信息")
+    @JwtIgnore
+    public ResultBean getCity(@PathVariable("id") Integer id) {
+        City city = cityService.selectByPrimaryKey(id);
+        return ResultBean.success(city);
     }
 
 
