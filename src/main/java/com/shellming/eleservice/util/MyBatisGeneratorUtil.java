@@ -8,7 +8,6 @@ import org.mybatis.generator.internal.DefaultShellCallback;
 import sun.nio.cs.Surrogate;
 
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,8 +16,7 @@ public class MyBatisGeneratorUtil {
         List<String> warnings = new ArrayList<String>();
         boolean overwrite = true;
         ConfigurationParser cp = new ConfigurationParser(warnings);
-        Configuration config = cp.parseConfiguration(
-                Surrogate.Generator.class.getResourceAsStream("/generatorConfig.xml"));
+        Configuration config = cp.parseConfiguration(Surrogate.Generator.class.getResourceAsStream("/generatorConfig.xml"));
         DefaultShellCallback callback = new DefaultShellCallback(overwrite);
         MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config, callback, warnings);
         myBatisGenerator.generate(null);

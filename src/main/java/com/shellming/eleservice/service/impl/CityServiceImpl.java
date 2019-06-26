@@ -26,6 +26,11 @@ public class CityServiceImpl implements ICityService {
     private CityMapper cityMapper;
 
     @Override
+    public int insert(City city) {
+        return cityMapper.insert(city);
+    }
+
+    @Override
     public int loadCityData() {
         log.info("加载城市JSON数据");
         int count = 0;
@@ -37,9 +42,25 @@ public class CityServiceImpl implements ICityService {
                 String value = jsonObject.getString(key);
                 log.info("key:" + key);
                 log.info("value:{}", value);
-                for (Object city : JSONArray.fromObject(value)) {
-                    Map map = toMap(city);
-                    Map data = toMap(map.get("properties"));
+                for (Object data : JSONArray.fromObject(value)) {
+                    JSONObject obj = (JSONObject) data;
+                    City city = new City((Integer)obj.get("id"),
+                            (String) obj.get("name"),
+                            (String) obj.get("abbr"),
+                            key,
+                            (String) obj.get("area_code"),
+                            (Integer) obj.get("sort"),
+                            (String) obj.get("latitude"),
+                            (String) obj.get("longitude"),
+                            (boolean) obj.get("is_map"),
+                            (String) obj.get("pinyin")
+                            );
+                    log.info("city: {}", city);
+                    int ret = cityMapper.insert(city);
+                    if (ret > 0) {
+                        log.info("插入成功");
+                        count++;
+                    }
                 }
             }
         }
@@ -66,7 +87,6 @@ public class CityServiceImpl implements ICityService {
                 String name = fields[i].getName();
                 Field field = o.getClass().getDeclaredField(name);
                 field.setAccessible(true);
-                log.info("set:" + name + ":" + field);
                 if (null != field) {
                     map.put(name, field.get(o).toString());
                 }

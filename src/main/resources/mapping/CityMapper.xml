@@ -8,10 +8,10 @@
     <result column="key" jdbcType="VARCHAR" property="key" />
     <result column="area_code" jdbcType="VARCHAR" property="area_code" />
     <result column="sort" jdbcType="INTEGER" property="sort" />
-    <result column="latitude" jdbcType="DOUBLE" property="latitude" />
-    <result column="longitude" jdbcType="DOUBLE" property="longitude" />
+    <result column="latitude" jdbcType="VARCHAR" property="latitude" />
+    <result column="longitude" jdbcType="VARCHAR" property="longitude" />
     <result column="is_map" jdbcType="BIT" property="is_map" />
-    <result column="pinyin" jdbcType="BIT" property="pinyin" />
+    <result column="pinyin" jdbcType="VARCHAR" property="pinyin" />
   </resultMap>
   <sql id="Base_Column_List">
     id, name, abbr, key, area_code, sort, latitude, longitude, is_map, pinyin
@@ -32,10 +32,12 @@
     </selectKey>
     insert into city (name, abbr, key, 
       area_code, sort, latitude, 
-      longitude, is_map, pinyin)
+      longitude, is_map, pinyin
+      )
     values (#{name,jdbcType=VARCHAR}, #{abbr,jdbcType=VARCHAR}, #{key,jdbcType=VARCHAR}, 
-      #{area_code,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, #{latitude,jdbcType=DOUBLE}, 
-      #{longitude,jdbcType=DOUBLE}, #{is_map,jdbcType=BIT}, #{pinyin,jdbcType=BIT})
+      #{area_code,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, #{latitude,jdbcType=VARCHAR}, 
+      #{longitude,jdbcType=VARCHAR}, #{is_map,jdbcType=BIT}, #{pinyin,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.shellming.eleservice.entity.City">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -88,16 +90,16 @@
         #{sort,jdbcType=INTEGER},
       </if>
       <if test="latitude != null">
-        #{latitude,jdbcType=DOUBLE},
+        #{latitude,jdbcType=VARCHAR},
       </if>
       <if test="longitude != null">
-        #{longitude,jdbcType=DOUBLE},
+        #{longitude,jdbcType=VARCHAR},
       </if>
       <if test="is_map != null">
         #{is_map,jdbcType=BIT},
       </if>
       <if test="pinyin != null">
-        #{pinyin,jdbcType=BIT},
+        #{pinyin,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -120,16 +122,16 @@
         sort = #{sort,jdbcType=INTEGER},
       </if>
       <if test="latitude != null">
-        latitude = #{latitude,jdbcType=DOUBLE},
+        latitude = #{latitude,jdbcType=VARCHAR},
       </if>
       <if test="longitude != null">
-        longitude = #{longitude,jdbcType=DOUBLE},
+        longitude = #{longitude,jdbcType=VARCHAR},
       </if>
       <if test="is_map != null">
         is_map = #{is_map,jdbcType=BIT},
       </if>
       <if test="pinyin != null">
-        pinyin = #{pinyin,jdbcType=BIT},
+        pinyin = #{pinyin,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -141,10 +143,10 @@
       key = #{key,jdbcType=VARCHAR},
       area_code = #{area_code,jdbcType=VARCHAR},
       sort = #{sort,jdbcType=INTEGER},
-      latitude = #{latitude,jdbcType=DOUBLE},
-      longitude = #{longitude,jdbcType=DOUBLE},
+      latitude = #{latitude,jdbcType=VARCHAR},
+      longitude = #{longitude,jdbcType=VARCHAR},
       is_map = #{is_map,jdbcType=BIT},
-      pinyin = #{pinyin,jdbcType=BIT}
+      pinyin = #{pinyin,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

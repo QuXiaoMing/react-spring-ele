@@ -26,10 +26,10 @@ CREATE TABLE `city` (
                         `key` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT 'key',
                         `area_code` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT 'area_code',
                         `sort` integer(11) COLLATE utf8_unicode_ci NOT NULL COMMENT 'sort',
-                        `latitude` double COLLATE utf8_unicode_ci NOT NULL COMMENT 'latitude',
-                        `longitude` double COLLATE utf8_unicode_ci NOT NULL COMMENT 'longitude',
+                        `latitude` varchar(11) COLLATE utf8_unicode_ci NOT NULL COMMENT 'latitude',
+                        `longitude` varchar(11) COLLATE utf8_unicode_ci NOT NULL COMMENT 'longitude',
                         `is_map` boolean COLLATE utf8_unicode_ci NOT NULL COMMENT 'is_map',
-                        `pinyin` boolean COLLATE utf8_unicode_ci NOT NULL COMMENT 'pinyin',
+                        `pinyin` varchar(20) COLLATE utf8_unicode_ci NOT NULL COMMENT 'pinyin',
                         PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
