@@ -1,4 +1,6 @@
 
+evn:
+  type: dev
 
 server:
   port: 8081
