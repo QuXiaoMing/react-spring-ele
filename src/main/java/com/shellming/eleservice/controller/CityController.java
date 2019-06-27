@@ -16,7 +16,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("city")
-@Api("城市接口")
+@Api(description = "城市接口")
 @Slf4j
 public class CityController {
 
