@@ -6,6 +6,9 @@ import com.shellming.eleservice.service.IShopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Map;
+
 @Service
 public class ShopServiceImpl implements IShopService {
     @Autowired
@@ -14,5 +17,10 @@ public class ShopServiceImpl implements IShopService {
     @Override
     public int create(Shop shop) {
         return shopMapper.insert(shop);
+    }
+
+    @Override
+    public List list(Map map) {
+        return shopMapper.list(map);
     }
 }

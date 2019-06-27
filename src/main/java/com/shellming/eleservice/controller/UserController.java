@@ -35,7 +35,7 @@ public class UserController{
 
     @ApiOperation(value = "用户列表" ,  notes="查询用户列表")
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public ResultBean getUserList(@RequestParam(defaultValue = "0") int pageNum, @RequestParam(defaultValue = "10") int pageSize) {
+    public ResultBean getUserList(@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "10") int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         Log.info("获取用户列表");
         Map map = new HashMap();

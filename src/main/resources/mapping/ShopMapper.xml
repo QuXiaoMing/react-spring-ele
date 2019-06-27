@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shellming.eleservice.mapper.ShopMapper">
+  <resultMap id="BaseResultMap" type="com.shellming.eleservice.entity.Shop">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="phone" jdbcType="INTEGER" property="phone" />
+    <result column="latitude" jdbcType="DOUBLE" property="latitude" />
+    <result column="longitude" jdbcType="DOUBLE" property="longitude" />
+    <result column="category" jdbcType="VARCHAR" property="category" />
+    <result column="image_path" jdbcType="VARCHAR" property="image_path" />
+    <result column="float_delivery_fee" jdbcType="INTEGER" property="float_delivery_fee" />
+    <result column="float_minimum_order_amount" jdbcType="INTEGER" property="float_minimum_order_amount" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="promotion_info" jdbcType="VARCHAR" property="promotion_info" />
+    <result column="is_premium" jdbcType="BIT" property="is_premium" />
+    <result column="delivery_mode" jdbcType="BIT" property="delivery_mode" />
+    <result column="is_new" jdbcType="BIT" property="is_new" />
+    <result column="is_bao" jdbcType="BIT" property="is_bao" />
+    <result column="is_zhun" jdbcType="BIT" property="is_zhun" />
+    <result column="is_piao" jdbcType="BIT" property="is_piao" />
+    <result column="startTime" jdbcType="DATE" property="startTime" />
+    <result column="endTime" jdbcType="DATE" property="endTime" />
+    <result column="business_license_image" jdbcType="VARCHAR" property="business_license_image" />
+    <result column="catering_service_license_image" jdbcType="VARCHAR" property="catering_service_license_image" />
+    <result column="activities" jdbcType="VARCHAR" property="activities" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, phone, latitude, longitude, category, image_path, float_delivery_fee, float_minimum_order_amount, 
+    description, promotion_info, is_premium, delivery_mode, is_new, is_bao, is_zhun, 
+    is_piao, startTime, endTime, business_license_image, catering_service_license_image, 
+    activities
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from shop
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="list" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from shop
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from shop
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.shellming.eleservice.entity.Shop">
+    insert into shop (id, name, phone, latitude,
+      longitude, category, image_path, 
+      float_delivery_fee, float_minimum_order_amount, 
+      description, promotion_info, is_premium, 
+      delivery_mode, is_new, is_bao, 
+      is_zhun, is_piao, startTime, endTime, 
+      business_license_image, catering_service_license_image, 
+      activities)
+    values (#{name,jdbcType=VARCHAR},#{id,jdbcType=VARCHAR}, #{phone,jdbcType=INTEGER}, #{latitude,jdbcType=DOUBLE},
+      #{longitude,jdbcType=DOUBLE}, #{category,jdbcType=VARCHAR}, #{image_path,jdbcType=VARCHAR}, 
+      #{float_delivery_fee,jdbcType=INTEGER}, #{float_minimum_order_amount,jdbcType=INTEGER}, 
+      #{description,jdbcType=VARCHAR}, #{promotion_info,jdbcType=VARCHAR}, #{is_premium,jdbcType=BIT}, 
+      #{delivery_mode,jdbcType=BIT}, #{is_new,jdbcType=BIT}, #{is_bao,jdbcType=BIT}, 
+      #{is_zhun,jdbcType=BIT}, #{is_piao,jdbcType=BIT}, #{startTime,jdbcType=DATE}, #{endTime,jdbcType=DATE}, 
+      #{business_license_image,jdbcType=VARCHAR}, #{catering_service_license_image,jdbcType=VARCHAR}, 
+      #{activities,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.shellming.eleservice.entity.Shop">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.String">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into shop
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        name,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="latitude != null">
+        latitude,
+      </if>
+      <if test="longitude != null">
+        longitude,
+      </if>
+      <if test="category != null">
+        category,
+      </if>
+      <if test="image_path != null">
+        image_path,
+      </if>
+      <if test="float_delivery_fee != null">
+        float_delivery_fee,
+      </if>
+      <if test="float_minimum_order_amount != null">
+        float_minimum_order_amount,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="promotion_info != null">
+        promotion_info,
+      </if>
+      <if test="is_premium != null">
+        is_premium,
+      </if>
+      <if test="delivery_mode != null">
+        delivery_mode,
+      </if>
+      <if test="is_new != null">
+        is_new,
+      </if>
+      <if test="is_bao != null">
+        is_bao,
+      </if>
+      <if test="is_zhun != null">
+        is_zhun,
+      </if>
+      <if test="is_piao != null">
+        is_piao,
+      </if>
+      <if test="startTime != null">
+        startTime,
+      </if>
+      <if test="endTime != null">
+        endTime,
+      </if>
+      <if test="business_license_image != null">
+        business_license_image,
+      </if>
+      <if test="catering_service_license_image != null">
+        catering_service_license_image,
+      </if>
+      <if test="activities != null">
+        activities,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=INTEGER},
+      </if>
+      <if test="latitude != null">
+        #{latitude,jdbcType=DOUBLE},
+      </if>
+      <if test="longitude != null">
+        #{longitude,jdbcType=DOUBLE},
+      </if>
+      <if test="category != null">
+        #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="image_path != null">
+        #{image_path,jdbcType=VARCHAR},
+      </if>
+      <if test="float_delivery_fee != null">
+        #{float_delivery_fee,jdbcType=INTEGER},
+      </if>
+      <if test="float_minimum_order_amount != null">
+        #{float_minimum_order_amount,jdbcType=INTEGER},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="promotion_info != null">
+        #{promotion_info,jdbcType=VARCHAR},
+      </if>
+      <if test="is_premium != null">
+        #{is_premium,jdbcType=BIT},
+      </if>
+      <if test="delivery_mode != null">
+        #{delivery_mode,jdbcType=BIT},
+      </if>
+      <if test="is_new != null">
+        #{is_new,jdbcType=BIT},
+      </if>
+      <if test="is_bao != null">
+        #{is_bao,jdbcType=BIT},
+      </if>
+      <if test="is_zhun != null">
+        #{is_zhun,jdbcType=BIT},
+      </if>
+      <if test="is_piao != null">
+        #{is_piao,jdbcType=BIT},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=DATE},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=DATE},
+      </if>
+      <if test="business_license_image != null">
+        #{business_license_image,jdbcType=VARCHAR},
+      </if>
+      <if test="catering_service_license_image != null">
+        #{catering_service_license_image,jdbcType=VARCHAR},
+      </if>
+      <if test="activities != null">
+        #{activities,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shellming.eleservice.entity.Shop">
+    update shop
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=INTEGER},
+      </if>
+      <if test="latitude != null">
+        latitude = #{latitude,jdbcType=DOUBLE},
+      </if>
+      <if test="longitude != null">
+        longitude = #{longitude,jdbcType=DOUBLE},
+      </if>
+      <if test="category != null">
+        category = #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="image_path != null">
+        image_path = #{image_path,jdbcType=VARCHAR},
+      </if>
+      <if test="float_delivery_fee != null">
+        float_delivery_fee = #{float_delivery_fee,jdbcType=INTEGER},
+      </if>
+      <if test="float_minimum_order_amount != null">
+        float_minimum_order_amount = #{float_minimum_order_amount,jdbcType=INTEGER},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="promotion_info != null">
+        promotion_info = #{promotion_info,jdbcType=VARCHAR},
+      </if>
+      <if test="is_premium != null">
+        is_premium = #{is_premium,jdbcType=BIT},
+      </if>
+      <if test="delivery_mode != null">
+        delivery_mode = #{delivery_mode,jdbcType=BIT},
+      </if>
+      <if test="is_new != null">
+        is_new = #{is_new,jdbcType=BIT},
+      </if>
+      <if test="is_bao != null">
+        is_bao = #{is_bao,jdbcType=BIT},
+      </if>
+      <if test="is_zhun != null">
+        is_zhun = #{is_zhun,jdbcType=BIT},
+      </if>
+      <if test="is_piao != null">
+        is_piao = #{is_piao,jdbcType=BIT},
+      </if>
+      <if test="startTime != null">
+        startTime = #{startTime,jdbcType=DATE},
+      </if>
+      <if test="endTime != null">
+        endTime = #{endTime,jdbcType=DATE},
+      </if>
+      <if test="business_license_image != null">
+        business_license_image = #{business_license_image,jdbcType=VARCHAR},
+      </if>
+      <if test="catering_service_license_image != null">
+        catering_service_license_image = #{catering_service_license_image,jdbcType=VARCHAR},
+      </if>
+      <if test="activities != null">
+        activities = #{activities,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shellming.eleservice.entity.Shop">
+    update shop
+    set name = #{name,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=INTEGER},
+      latitude = #{latitude,jdbcType=DOUBLE},
+      longitude = #{longitude,jdbcType=DOUBLE},
+      category = #{category,jdbcType=VARCHAR},
+      image_path = #{image_path,jdbcType=VARCHAR},
+      float_delivery_fee = #{float_delivery_fee,jdbcType=INTEGER},
+      float_minimum_order_amount = #{float_minimum_order_amount,jdbcType=INTEGER},
+      description = #{description,jdbcType=VARCHAR},
+      promotion_info = #{promotion_info,jdbcType=VARCHAR},
+      is_premium = #{is_premium,jdbcType=BIT},
+      delivery_mode = #{delivery_mode,jdbcType=BIT},
+      is_new = #{is_new,jdbcType=BIT},
+      is_bao = #{is_bao,jdbcType=BIT},
+      is_zhun = #{is_zhun,jdbcType=BIT},
+      is_piao = #{is_piao,jdbcType=BIT},
+      startTime = #{startTime,jdbcType=DATE},
+      endTime = #{endTime,jdbcType=DATE},
+      business_license_image = #{business_license_image,jdbcType=VARCHAR},
+      catering_service_license_image = #{catering_service_license_image,jdbcType=VARCHAR},
+      activities = #{activities,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
