@@ -17,6 +17,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -28,6 +29,11 @@ public class CityServiceImpl implements ICityService {
     @Override
     public int insert(City city) {
         return cityMapper.insert(city);
+    }
+
+    @Override
+    public List list(Map map) {
+        return cityMapper.list(map);
     }
 
     @Override
@@ -87,23 +93,5 @@ public class CityServiceImpl implements ICityService {
             log.error("解析JSON报错{}", e);
         }
         return null;
-    }
-
-    public static Map<String, String> toMap(Object o) {
-        Map<String, String> map = new HashMap<String, String>();
-        Field[] fields = o.getClass().getDeclaredFields();
-        try {
-            for (int i = 0; i < fields.length; i++) {
-                String name = fields[i].getName();
-                Field field = o.getClass().getDeclaredField(name);
-                field.setAccessible(true);
-                if (null != field) {
-                    map.put(name, field.get(o).toString());
-                }
-            }
-        } catch (Exception e) {
-            log.error(e.getMessage(), e);
-        }
-        return map;
     }
 }

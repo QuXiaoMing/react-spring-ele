@@ -16,17 +16,13 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public List<User> list(Map map){
-        System.out.println("map" + map);
         List ret = userMapper.list(map);
-        System.out.println("ret" + ret);
         return ret;
     }
 
     @Override
     public int create(User map) {
-        System.out.println("map" + map);
         int ret = userMapper.insert(map);
-        System.out.println("ret" + ret);
         return ret;
     }
 

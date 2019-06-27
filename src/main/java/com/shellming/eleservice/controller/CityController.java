@@ -10,6 +10,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 @RestController
 @RequestMapping("city")
 @Api("城市接口")
@@ -23,11 +27,15 @@ public class CityController {
     @ApiOperation("获取城市列表")
     @JwtIgnore
     public ResultBean list() {
-        int cout = cityService.loadCityData();
-        return ResultBean.success(cout);
+        Map map = new HashMap();
+        List list = cityService.list(map);
+        if (list != null) {
+            return ResultBean.success(list);
+        }
+        return ResultBean.fail("获取失败");
     }
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
+    @RequestMapping(value = "loadCityData", method = RequestMethod.GET)
     @ApiOperation("加载城市数据")
     @JwtIgnore
     public ResultBean loadCityData() {
@@ -40,7 +48,9 @@ public class CityController {
     @ApiOperation("获取城市信息")
     @JwtIgnore
     public ResultBean getCity(@PathVariable("id") Integer id) {
+        log.info("获取城市信息:" + id);
         City city = cityService.selectByPrimaryKey(id);
+        log.info("获取城市信息: {}" + city);
         return ResultBean.success(city);
     }
 
@@ -54,6 +64,6 @@ public class CityController {
         if (ret > 0) {
             return ResultBean.success(ret);
         }
-        return  ResultBean.fail("创建失败");
+        return ResultBean.fail("创建失败");
     }
 }
