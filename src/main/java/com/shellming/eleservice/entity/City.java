@@ -1,12 +1,5 @@
 package com.shellming.eleservice.entity;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-
-@Getter
-@Setter
-@ToString
 public class City {
     private Integer id;
 
@@ -14,31 +7,47 @@ public class City {
 
     private String abbr;
 
-    private String key;
+    private String name_key;
 
     private String area_code;
 
     private Integer sort;
 
-    private String latitude;
+    private Double latitude;
 
-    private String longitude;
+    private Double longitude;
 
     private Boolean is_map;
 
     private String pinyin;
 
-    public City(Integer id, String name, String abbr, String key, String area_code, Integer sort, String latitude, String longitude, Boolean is_map, String pinyin) {
+    public City(Integer id, String name, String abbr, String name_key, String area_code, Integer sort, Double latitude, Double longitude, Boolean is_map, String pinyin) {
         this.id = id;
         this.name = name;
         this.abbr = abbr;
-        this.key = key;
+        this.name_key = name_key;
         this.area_code = area_code;
         this.sort = sort;
         this.latitude = latitude;
         this.longitude = longitude;
         this.is_map = is_map;
         this.pinyin = pinyin;
+    }
+
+    @Override
+    public String toString() {
+        return "City{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", abbr='" + abbr + '\'' +
+                ", name_key='" + name_key + '\'' +
+                ", area_code='" + area_code + '\'' +
+                ", sort=" + sort +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
+                ", is_map=" + is_map +
+                ", pinyin='" + pinyin + '\'' +
+                '}';
     }
 
     public Integer getId() {
@@ -65,12 +74,12 @@ public class City {
         this.abbr = abbr == null ? null : abbr.trim();
     }
 
-    public String getKey() {
-        return key;
+    public String getName_key() {
+        return name_key;
     }
 
-    public void setKey(String key) {
-        this.key = key == null ? null : key.trim();
+    public void setName_key(String name_key) {
+        this.name_key = name_key == null ? null : name_key.trim();
     }
 
     public String getArea_code() {
@@ -89,20 +98,20 @@ public class City {
         this.sort = sort;
     }
 
-    public String getLatitude() {
+    public Double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(String latitude) {
-        this.latitude = latitude == null ? null : latitude.trim();
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
     }
 
-    public String getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(String longitude) {
-        this.longitude = longitude == null ? null : longitude.trim();
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 
     public Boolean getIs_map() {

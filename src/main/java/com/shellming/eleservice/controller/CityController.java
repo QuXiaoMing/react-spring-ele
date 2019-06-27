@@ -27,6 +27,14 @@ public class CityController {
         return ResultBean.success(cout);
     }
 
+    @RequestMapping(value = "", method = RequestMethod.GET)
+    @ApiOperation("加载城市数据")
+    @JwtIgnore
+    public ResultBean loadCityData() {
+        int count = cityService.loadCityData();
+        return ResultBean.success(count);
+    }
+
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ApiOperation("获取城市信息")

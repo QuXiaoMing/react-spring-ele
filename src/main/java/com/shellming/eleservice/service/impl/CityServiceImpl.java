@@ -48,23 +48,28 @@ public class CityServiceImpl implements ICityService {
                 log.info("key:" + key);
                 log.info("value:{}", value);
                 for (Object data : JSONArray.fromObject(value)) {
-                    JSONObject obj = (JSONObject) data;
-                    City city = new City((Integer)obj.get("id"),
-                            (String) obj.get("name"),
-                            (String) obj.get("abbr"),
-                            key,
-                            (String) obj.get("area_code"),
-                            (Integer) obj.get("sort"),
-                            (String) obj.get("latitude"),
-                            (String) obj.get("longitude"),
-                            (boolean) obj.get("is_map"),
-                            (String) obj.get("pinyin")
-                            );
-                    log.info("city: {}", city);
-                    int ret = cityMapper.insert(city);
-                    if (ret > 0) {
-                        log.info("插入成功");
-                        count++;
+                    try {
+                        JSONObject obj = (JSONObject) data;
+                        City city = new City((Integer) obj.get("id"),
+                                (String) obj.get("name"),
+                                (String) obj.get("abbr"),
+                                key,
+                                (String) obj.get("area_code"),
+                                (Integer) obj.get("sort"),
+                                (Double) obj.get("latitude"),
+                                (Double) obj.get("longitude"),
+                                (boolean) obj.get("is_map"),
+                                (String) obj.get("pinyin")
+                        );
+                        log.info("city: {}", city);
+                        int ret = cityMapper.insert(city);
+                        if (ret > 0) {
+                            log.info("插入成功");
+                            count++;
+                        }
+                    } catch (Exception e) {
+                        log.error("插入失败:{}", data);
+                        log.error(e.toString());
                     }
                 }
             }
