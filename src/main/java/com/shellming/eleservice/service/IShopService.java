@@ -9,4 +9,6 @@ public interface IShopService {
     int create(Shop shop);
 
     List list(Map map);
+
+    List search(Map map);
 }

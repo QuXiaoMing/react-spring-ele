@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.shellming.eleservice.common.ResultBean;
 import com.shellming.eleservice.entity.Shop;
+import com.shellming.eleservice.service.JwtIgnore;
 import com.shellming.eleservice.service.impl.ShopServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -45,5 +46,21 @@ public class ShopController {
         PageInfo pageInfo = new PageInfo(ret);
         log.info("商户列表:{}", pageInfo);
         return ResultBean.success(pageInfo);
+    }
+
+
+    @RequestMapping(value = "search", method = RequestMethod.GET)
+    @ApiOperation("城市搜索")
+    public ResultBean search(@RequestParam("latitude") Double latitude, @RequestParam("longitude") Double longitude) {
+        Map map = new HashMap();
+        map.put("longitude", longitude);
+        map.put("latitude", latitude);
+        log.info("搜索餐馆{}", map);
+        List list = shopService.search(map);
+        log.info("搜索餐馆 -> {}", list);
+        if (list != null) {
+            return ResultBean.success(list);
+        }
+        return ResultBean.fail("获取失败");
     }
 }

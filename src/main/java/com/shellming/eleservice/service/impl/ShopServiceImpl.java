@@ -23,4 +23,9 @@ public class ShopServiceImpl implements IShopService {
     public List list(Map map) {
         return shopMapper.list(map);
     }
+
+    @Override
+    public List search(Map map) {
+        return shopMapper.search(map);
+    }
 }

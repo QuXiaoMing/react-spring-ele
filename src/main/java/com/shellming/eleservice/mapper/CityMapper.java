@@ -10,6 +10,8 @@ import java.util.Map;
 public interface CityMapper {
     List list(Map map);
 
+    List search(Map map);
+
     int deleteByPrimaryKey(Integer id);
 
     int insert(City record);

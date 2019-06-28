@@ -12,6 +12,8 @@ public interface ShopMapper {
 
     List list(Map map);
 
+    List search(Map map);
+
     int insert(Shop record);
 
     int insertSelective(Shop record);

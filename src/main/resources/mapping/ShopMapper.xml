@@ -31,6 +31,14 @@
     is_piao, startTime, endTime, business_license_image, catering_service_license_image, 
     activities
   </sql>
+  <sql id="distance">
+    (
+    6371 * acos (
+    cos ( radians( #{latitude} ) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians( #{longitude} ) ) + sin ( radians( #{latitude} ) ) * sin( radians( latitude ) )
+    )
+    )
+    AS distance
+  </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -41,6 +49,13 @@
     select
     <include refid="Base_Column_List" />
     from shop
+  </select>
+  <select id="search" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />,
+    <include refid="distance" />
+    from shop
+    ORDER BY distance
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from shop

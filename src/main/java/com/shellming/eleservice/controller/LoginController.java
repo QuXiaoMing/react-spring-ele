@@ -10,6 +10,8 @@ import com.shellming.eleservice.util.JwtUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import net.sf.json.JSON;
+import net.sf.json.JSONObject;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -35,7 +37,12 @@ public class LoginController {
     @ApiOperation(value = "登录")
     @PostMapping("/login")
     @JwtIgnore // 加此注解, 请求不做token验证
-    public ResultBean login(@RequestParam("username") String username, @RequestParam("password") String password) {
+    public ResultBean login(
+            @RequestBody String params
+    ) {
+        JSONObject object = JSONObject.fromObject(params);
+        String username = object.get("username").toString();
+        String password = object.get("password").toString();
         if (!StringUtils.isNotBlank(username) || !StringUtils.isNotBlank(password)) {
             return ResultBean.fail("用户名密码不能为空");
         }
