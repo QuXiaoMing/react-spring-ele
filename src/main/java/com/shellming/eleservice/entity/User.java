@@ -10,7 +10,6 @@ import javax.validation.constraints.NotEmpty;
 //import java.util.ArrayList;
 //import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 
 public class User {
     private String user_id;
