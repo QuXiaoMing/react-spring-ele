@@ -28,4 +28,9 @@ public class ShopServiceImpl implements IShopService {
     public List search(Map map) {
         return shopMapper.search(map);
     }
+
+    @Override
+    public int deleteByPrimaryKey(String id) {
+        return shopMapper.deleteByPrimaryKey(id);
+    }
 }

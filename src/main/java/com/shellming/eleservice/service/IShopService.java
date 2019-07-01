@@ -11,4 +11,6 @@ public interface IShopService {
     List list(Map map);
 
     List search(Map map);
+
+    int deleteByPrimaryKey(String id);
 }

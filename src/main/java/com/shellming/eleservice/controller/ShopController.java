@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -67,5 +68,15 @@ public class ShopController {
             return ResultBean.success(list);
         }
         return ResultBean.fail("获取失败");
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @ApiOperation("删除店铺")
+    public ResultBean deleteBy(@PathVariable("id") String id) {
+        int ret = shopService.deleteByPrimaryKey(id);
+        if (ret > 0) {
+            return ResultBean.success("删除成功");
+        }
+        return ResultBean.fail("删除失败");
     }
 }
