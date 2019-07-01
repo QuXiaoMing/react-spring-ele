@@ -4,16 +4,16 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.shellming.eleservice.common.ResultBean;
 import com.shellming.eleservice.entity.Shop;
-import com.shellming.eleservice.service.JwtIgnore;
 import com.shellming.eleservice.service.impl.ShopServiceImpl;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,9 +44,12 @@ public class ShopController {
 
     @ApiOperation(value = "商户列表")
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public ResultBean create(@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "10") int pageSize) {
+    public ResultBean list(@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "10") int pageSize, @RequestParam(required = false) String name) {
         PageHelper.startPage(pageNum, pageSize);
         Map map = new HashMap();
+        if (StringUtils.isNotBlank(name)) {
+            map.put("name", name);
+        }
         log.info("商户列表:{}", map);
         List ret = shopService.list(map);
         PageInfo pageInfo = new PageInfo(ret);
