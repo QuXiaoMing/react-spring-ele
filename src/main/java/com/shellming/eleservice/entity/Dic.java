@@ -6,7 +6,7 @@ import lombok.Data;
 public class Dic {
     private String id;
 
-    private String key;
+    private String _key;
 
     private String name;
 
