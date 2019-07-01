@@ -36,7 +36,6 @@ public class JwtInterceptor implements HandlerInterceptor {
                              Object handler) throws Exception {
 
         // 开发环境关闭鉴权
-        log.info("evn" + MyConfig.evn);
         if (MyConfig.evn.equals("dev")) {
             return true;
         }
