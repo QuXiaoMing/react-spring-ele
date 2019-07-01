@@ -8,7 +8,7 @@
         <result column="latitude" jdbcType="DOUBLE" property="latitude"/>
         <result column="longitude" jdbcType="DOUBLE" property="longitude"/>
         <result column="category" jdbcType="VARCHAR" property="category"/>
-        <result column="address" jdbcType="VARCHAR" property="category"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
         <result column="image_path" jdbcType="VARCHAR" property="image_path"/>
         <result column="float_delivery_fee" jdbcType="INTEGER" property="float_delivery_fee"/>
         <result column="float_minimum_order_amount" jdbcType="INTEGER" property="float_minimum_order_amount"/>
@@ -72,7 +72,7 @@
       is_zhun, is_piao,createdAt, startTime, endTime,
       business_license_image, catering_service_license_image, 
       activities)
-    values (#{name,jdbcType=VARCHAR},#{id,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{latitude,jdbcType=DOUBLE},
+    values (#{id,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{latitude,jdbcType=DOUBLE},
       #{longitude,jdbcType=DOUBLE}, #{category,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{image_path,jdbcType=VARCHAR},
       #{float_delivery_fee,jdbcType=INTEGER}, #{float_minimum_order_amount,jdbcType=INTEGER}, 
       #{description,jdbcType=VARCHAR}, #{promotion_info,jdbcType=VARCHAR}, #{is_premium,jdbcType=BIT}, 

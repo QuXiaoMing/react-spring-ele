@@ -20,7 +20,7 @@ USE `ele`;
 DROP TABLE IF EXISTS `shop`;
 
 CREATE TABLE `shop` (
-                        `id` varchar (20) COLLATE utf8_unicode_ci NOT NULL COMMENT 'id',
+                        `id` varchar (36) COLLATE utf8_unicode_ci NOT NULL COMMENT 'id',
                         `name` varchar(20) COLLATE utf8_unicode_ci NOT NULL COMMENT '名称',
                         `phone` integer(11) COLLATE utf8_unicode_ci NOT NULL COMMENT '联系电话',
                         `address` varchar(20) COLLATE utf8_unicode_ci NOT NULL COMMENT '地址',

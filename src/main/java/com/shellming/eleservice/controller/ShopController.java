@@ -16,6 +16,7 @@ import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 @RestController
 @Api(description = "商家接口")
@@ -29,6 +30,9 @@ public class ShopController {
     @ApiOperation(value = "创建商户")
     @RequestMapping(value = "", method = RequestMethod.POST)
     public ResultBean create(@RequestBody @Valid Shop shop) {
+        shop.setId(UUID.randomUUID().toString());
+        shop.setLatitude(12.12);
+        shop.setLongitude(12.12);
         log.info("创建商户:{}", shop);
         int ret = shopService.create(shop);
         if (ret > 0) {
