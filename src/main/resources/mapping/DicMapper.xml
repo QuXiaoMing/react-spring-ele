@@ -8,7 +8,7 @@
     <result column="value" jdbcType="VARCHAR" property="value" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, key, name, value
+    id, `key`, name, value
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -30,12 +30,9 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.shellming.eleservice.entity.Dic">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.String">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into dic (key, name, value
+    insert into dic (id, `key`, name, value
       )
-    values (#{key,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{value,jdbcType=VARCHAR}
+    values (#{id,jdbcType=VARCHAR},#{key,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{value,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.shellming.eleservice.entity.Dic">
@@ -45,7 +42,7 @@
     insert into dic
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="key != null">
-        key,
+        `key`,
       </if>
       <if test="name != null">
         name,
@@ -70,7 +67,7 @@
     update dic
     <set>
       <if test="key != null">
-        key = #{key,jdbcType=VARCHAR},
+        `key` = #{key,jdbcType=VARCHAR},
       </if>
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
@@ -83,7 +80,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.shellming.eleservice.entity.Dic">
     update dic
-    set key = #{key,jdbcType=VARCHAR},
+    set `key` = #{key,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
       value = #{value,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
