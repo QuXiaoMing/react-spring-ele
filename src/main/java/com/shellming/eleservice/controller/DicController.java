@@ -8,6 +8,7 @@ import com.shellming.eleservice.service.impl.DicSerciveImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,8 +28,14 @@ public class DicController {
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     @ApiOperation(value = "字典列表")
-    public ResultBean list(@RequestParam(defaultValue = "10") int pageSize, @RequestParam(defaultValue = "1") int pageNum) {
+    public ResultBean list(@RequestParam(defaultValue = "10") int pageSize, @RequestParam(defaultValue = "1") int pageNum, @RequestParam(required = false) String name, @RequestParam(required = false) String key) {
         Map map = new HashMap();
+        if (StringUtils.isNotBlank(name)) {
+            map.put("name", name);
+        }
+        if (StringUtils.isNotBlank(key)) {
+            map.put("key", key);
+        }
         PageHelper.startPage(pageNum, pageSize);
         log.info("获取系统字典列表:{}", map);
         List list = dicSercive.list(map);
@@ -50,8 +57,8 @@ public class DicController {
     }
 
     @ApiOperation(value = "删除字段")
-    @RequestMapping(value = "", method = RequestMethod.DELETE)
-    public ResultBean create(@RequestParam String id) {
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public ResultBean deleteByPrimaryKey(@PathVariable("id") String id) {
         log.info("删除字段{}", id);
         int ret = dicSercive.deleteByPrimaryKey(id);
         if (ret > 0) {

@@ -21,8 +21,9 @@ mybatis:
 logging:
   level:
     com:
-      example:
-        mapper : debug
+      shellming:
+        eleservice:
+          mapper : debug
 
 # pageHelper分页配置
 pagehelper:

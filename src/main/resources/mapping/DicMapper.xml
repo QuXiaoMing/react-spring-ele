@@ -6,9 +6,10 @@
     <result column="key" jdbcType="VARCHAR" property="key" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="value" jdbcType="VARCHAR" property="value" />
+    <result column="text" jdbcType="VARCHAR" property="text" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, `key`, name, value
+    id, `key`, name, value, text
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -22,7 +23,10 @@
     from dic
     where 1 = 1
     <if test="key != null">
-      key = ${key, jdbcType="VARCHAR"}
+       AND `key` = #{key, jdbcType=VARCHAR}
+    </if>
+    <if test="name != null">
+      and name LIKE CONCAT('%',#{name,jdbcType=VARCHAR},'%')
     </if>
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
@@ -30,9 +34,9 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.shellming.eleservice.entity.Dic">
-    insert into dic (id, `key`, name, value
+    insert into dic (id, `key`, name, value, text
       )
-    values (#{id,jdbcType=VARCHAR},#{key,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{value,jdbcType=VARCHAR}
+    values (#{id,jdbcType=VARCHAR},#{key,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{value,jdbcType=VARCHAR}, #{text,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.shellming.eleservice.entity.Dic">
@@ -50,6 +54,9 @@
       <if test="value != null">
         value,
       </if>
+      <if test="text != null">
+        text,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="key != null">
@@ -60,6 +67,9 @@
       </if>
       <if test="value != null">
         #{value,jdbcType=VARCHAR},
+      </if>
+      <if test="text != null">
+        #{text,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -75,6 +85,9 @@
       <if test="value != null">
         value = #{value,jdbcType=VARCHAR},
       </if>
+      <if test="text != null">
+        value = #{text,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
@@ -82,6 +95,7 @@
     update dic
     set `key` = #{key,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
+      text = #{text,jdbcType=VARCHAR},
       value = #{value,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
