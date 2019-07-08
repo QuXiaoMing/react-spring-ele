@@ -32,14 +32,11 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.shellming.eleservice.entity.City">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into city (name, abbr, name_key, 
+    insert into city (id, name, abbr, name_key,
       area_code, sort, latitude, 
       longitude, is_map, pinyin
       )
-    values (#{name,jdbcType=VARCHAR}, #{abbr,jdbcType=VARCHAR}, #{name_key,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{abbr,jdbcType=VARCHAR}, #{name_key,jdbcType=VARCHAR},
       #{area_code,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, #{latitude,jdbcType=DOUBLE}, 
       #{longitude,jdbcType=DOUBLE}, #{is_map,jdbcType=BIT}, #{pinyin,jdbcType=VARCHAR}
       )

@@ -30,7 +30,10 @@ public class UserController{
         Log.info("获取用户信息" + id);
         User user = userService.getUserById(id);
         Log.info("获取用户信息{}", user);
-        return ResultBean.success(user);
+        if (user != null) {
+            return ResultBean.success(user);
+        }
+        return ResultBean.fail("用户不存在");
     }
 
     @ApiOperation(value = "用户列表" ,  notes="查询用户列表")

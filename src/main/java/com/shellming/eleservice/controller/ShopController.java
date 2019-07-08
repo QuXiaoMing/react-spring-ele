@@ -35,6 +35,7 @@ public class ShopController {
         shop.setLatitude(12.12);
         shop.setLongitude(12.12);
         log.info("创建商户:{}", shop);
+        shop.setId(UUID.randomUUID().toString());
         int ret = shopService.create(shop);
         if (ret > 0) {
             return ResultBean.success("创建成功");
