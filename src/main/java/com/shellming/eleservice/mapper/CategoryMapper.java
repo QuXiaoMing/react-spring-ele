@@ -12,6 +12,8 @@ public interface CategoryMapper {
 
     List list(Map map);
 
+    List findByParentId(int parentId);
+
     int insert(Category record);
 
     int insertSelective(Category record);

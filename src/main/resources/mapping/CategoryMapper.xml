@@ -15,6 +15,12 @@
     from category
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="findByParentId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from category
+    where parentId = #{parentId,jdbcType=INTEGER}
+  </select>
   <select id="list" parameterType="java.util.Map" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />

@@ -8,5 +8,7 @@ import java.util.Map;
 public interface ICategoryService {
     List list(Map map);
 
+    List findByParentId(int parentId);
+
     int insert(Category category);
 }

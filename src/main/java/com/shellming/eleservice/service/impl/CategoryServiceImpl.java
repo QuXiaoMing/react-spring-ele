@@ -23,4 +23,9 @@ public class CategoryServiceImpl implements ICategoryService {
     public int insert(Category category) {
         return categoryMapper.insert(category);
     }
+
+    @Override
+    public List findByParentId(int parentId) {
+        return  categoryMapper.findByParentId(parentId);
+    }
 }

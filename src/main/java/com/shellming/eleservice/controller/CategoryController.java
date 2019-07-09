@@ -37,6 +37,7 @@ public class CategoryController {
         PageInfo ret = new PageInfo(list);
         return ResultBean.success(ret);
     }
+
     @RequestMapping(value = "", method = RequestMethod.POST)
     @ApiOperation(value = "添加分类")
     public  ResultBean create(@RequestBody Category category) {
@@ -47,5 +48,25 @@ public class CategoryController {
             return  ResultBean.success(ret);
         }
         return ResultBean.fail("创建失败");
+    }
+
+    @ApiOperation(value = "获取子分类")
+    @RequestMapping(value = "findByParentId", method = RequestMethod.GET)
+    public ResultBean findByParentId(@RequestParam int parentId, @RequestParam Boolean tree) {
+        log.info("获取子分类:" + parentId);
+        List<Category> list = categoryService.findByParentId(parentId);
+        if (tree == true && list.size() > 0) {
+            log.info("获取树形菜单");
+            for (Category o : list) {
+                int id = o.getId();
+                ResultBean ret = this.findByParentId(id, true);
+                if (ret.isSuccess()) {
+                    Object children = ret.getData();
+                    o.setChildren((List)children);
+                }
+            }
+        }
+        log.info("获取树形菜单 ->{}", list);
+        return ResultBean.success(list);
     }
 }
