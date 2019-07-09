@@ -7,6 +7,7 @@ import com.shellming.eleservice.entity.User;
 import com.shellming.eleservice.service.IUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,5 +84,18 @@ public class UserController{
             return ResultBean.success(ret);
         }
         throw new Exception("设置失败");
+    }
+
+    @ApiOperation(value = "修改用户信息")
+    @RequestMapping(value = "", method = RequestMethod.PUT)
+    public ResultBean setUserInfo(@RequestBody User user) throws Exception {
+        if (StringUtils.isBlank(user.getPassword())) {
+            user.setPassword(null);
+        }
+        int ret = userService.updateByPrimaryKeySelective(user);
+        if (ret > 0) {
+            return ResultBean.success("修改成功");
+        }
+        return ResultBean.fail("修改失败");
     }
 }

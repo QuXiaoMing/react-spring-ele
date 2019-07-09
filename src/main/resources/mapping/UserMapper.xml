@@ -120,11 +120,8 @@
       <if test="roles != null">
         roles = #{roles,jdbcType=VARCHAR},
       </if>
-      <if test="create_at != null">
-        create_at = #{create_at,jdbcType=TIMESTAMP},
-      </if>
       <if test="update_at != null">
-        update_at = #{update_at,jdbcType=TIMESTAMP},
+        update_at = now(),
       </if>
     </set>
     where user_id = #{user_id,jdbcType=VARCHAR}
