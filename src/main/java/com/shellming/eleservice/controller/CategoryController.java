@@ -24,8 +24,8 @@ public class CategoryController {
     @Autowired
     private CategoryServiceImpl categoryService;
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
     @ApiOperation(value = "分类列表")
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public ResultBean list(@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "10") int pageSize, @RequestParam(required = false) String name) {
         Map map = new HashMap();
         if (StringUtils.isNotBlank(name)) {
@@ -38,16 +38,41 @@ public class CategoryController {
         return ResultBean.success(ret);
     }
 
-    @RequestMapping(value = "", method = RequestMethod.POST)
     @ApiOperation(value = "添加分类")
-    public  ResultBean create(@RequestBody Category category) {
+    @RequestMapping(value = "", method = RequestMethod.POST)
+    public ResultBean create(@RequestBody Category category) {
         log.info("添加分类");
         int ret = categoryService.insert(category);
         log.info("创建结果{}", ret);
         if (ret > 0) {
-            return  ResultBean.success(ret);
+            return ResultBean.success(ret);
         }
         return ResultBean.fail("创建失败");
+    }
+
+    @ApiOperation(value = "删除分类")
+    @RequestMapping(value = "", method = RequestMethod.DELETE)
+    public ResultBean create(@RequestBody Integer id) {
+        log.info("删除分类");
+        int ret = categoryService.deleteByPrimaryKey(id);
+        log.info("删除分类结果{}", ret);
+        if (ret > 0) {
+            return ResultBean.success(ret);
+        }
+        return ResultBean.fail("删除失败");
+    }
+
+
+    @ApiOperation(value = "修改分类")
+    @RequestMapping(value = "", method = RequestMethod.PUT)
+    public ResultBean updateByPrimaryKeySelective(@RequestBody Category category) {
+        log.info("修改分类:{}", category);
+        int ret = categoryService.updateByPrimaryKeySelective(category);
+        log.info("修改分类结果{}", ret);
+        if (ret > 0) {
+            return ResultBean.success(ret);
+        }
+        return ResultBean.fail("修改失败");
     }
 
     @ApiOperation(value = "获取子分类")
@@ -62,7 +87,7 @@ public class CategoryController {
                 ResultBean ret = this.findByParentId(id, true);
                 if (ret.isSuccess()) {
                     Object children = ret.getData();
-                    o.setChildren((List)children);
+                    o.setChildren((List) children);
                 }
             }
         }

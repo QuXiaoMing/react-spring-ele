@@ -26,6 +26,16 @@ public class CategoryServiceImpl implements ICategoryService {
 
     @Override
     public List findByParentId(int parentId) {
-        return  categoryMapper.findByParentId(parentId);
+        return categoryMapper.findByParentId(parentId);
+    }
+
+    @Override
+    public int deleteByPrimaryKey(Integer id) {
+        return categoryMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public int updateByPrimaryKeySelective(Category category) {
+        return categoryMapper.updateByPrimaryKeySelective(category);
     }
 }

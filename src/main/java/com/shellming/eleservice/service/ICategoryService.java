@@ -11,4 +11,8 @@ public interface ICategoryService {
     List findByParentId(int parentId);
 
     int insert(Category category);
+
+    int deleteByPrimaryKey(Integer id);
+
+    int updateByPrimaryKeySelective(Category category);
 }
