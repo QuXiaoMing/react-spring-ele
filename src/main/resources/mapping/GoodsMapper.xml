@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shellming.eleservice.mapper.GoodsMapper">
+  <resultMap id="BaseResultMap" type="com.shellming.eleservice.entity.Goods">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="stock" jdbcType="INTEGER" property="stock" />
+    <result column="price" jdbcType="INTEGER" property="price" />
+    <result column="sales" jdbcType="INTEGER" property="sales" />
+    <result column="praise_rate" jdbcType="INTEGER" property="praise_rate" />
+    <result column="shop_id" jdbcType="VARCHAR" property="shop_id" />
+    <result column="user_id" jdbcType="VARCHAR" property="user_id" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="images" jdbcType="VARCHAR" property="images" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, remark, stock, price, sales, praise_rate, shop_id, user_id, status, images
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from goods
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from goods
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.shellming.eleservice.entity.Goods">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into goods (name, remark, stock, 
+      price, sales, praise_rate, 
+      shop_id, user_id, status, 
+      images)
+    values (#{name,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{stock,jdbcType=INTEGER}, 
+      #{price,jdbcType=INTEGER}, #{sales,jdbcType=INTEGER}, #{praise_rate,jdbcType=INTEGER}, 
+      #{shop_id,jdbcType=VARCHAR}, #{user_id,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{images,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.shellming.eleservice.entity.Goods">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into goods
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        name,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="stock != null">
+        stock,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="sales != null">
+        sales,
+      </if>
+      <if test="praise_rate != null">
+        praise_rate,
+      </if>
+      <if test="shop_id != null">
+        shop_id,
+      </if>
+      <if test="user_id != null">
+        user_id,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="images != null">
+        images,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="stock != null">
+        #{stock,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=INTEGER},
+      </if>
+      <if test="sales != null">
+        #{sales,jdbcType=INTEGER},
+      </if>
+      <if test="praise_rate != null">
+        #{praise_rate,jdbcType=INTEGER},
+      </if>
+      <if test="shop_id != null">
+        #{shop_id,jdbcType=VARCHAR},
+      </if>
+      <if test="user_id != null">
+        #{user_id,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="images != null">
+        #{images,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shellming.eleservice.entity.Goods">
+    update goods
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="stock != null">
+        stock = #{stock,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=INTEGER},
+      </if>
+      <if test="sales != null">
+        sales = #{sales,jdbcType=INTEGER},
+      </if>
+      <if test="praise_rate != null">
+        praise_rate = #{praise_rate,jdbcType=INTEGER},
+      </if>
+      <if test="shop_id != null">
+        shop_id = #{shop_id,jdbcType=VARCHAR},
+      </if>
+      <if test="user_id != null">
+        user_id = #{user_id,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="images != null">
+        images = #{images,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shellming.eleservice.entity.Goods">
+    update goods
+    set name = #{name,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      stock = #{stock,jdbcType=INTEGER},
+      price = #{price,jdbcType=INTEGER},
+      sales = #{sales,jdbcType=INTEGER},
+      praise_rate = #{praise_rate,jdbcType=INTEGER},
+      shop_id = #{shop_id,jdbcType=VARCHAR},
+      user_id = #{user_id,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      images = #{images,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
