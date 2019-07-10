@@ -3,6 +3,7 @@ package com.shellming.eleservice.service.impl;
 import com.shellming.eleservice.entity.Shop;
 import com.shellming.eleservice.mapper.ShopMapper;
 import com.shellming.eleservice.service.IShopService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
+@Slf4j
 public class ShopServiceImpl implements IShopService {
     @Autowired
     private ShopMapper shopMapper;
@@ -41,11 +43,13 @@ public class ShopServiceImpl implements IShopService {
 
     @Override
     public int updateByPrimaryKeySelective(Shop record) {
-        return updateByPrimaryKeySelective(record);
+        log.info("updateByPrimaryKeySelective{}", record);
+        return shopMapper.updateByPrimaryKeySelective(record);
     }
 
     @Override
     public int updateByPrimaryKey(Shop record) {
-        return updateByPrimaryKey(record);
+        log.info("updateByPrimaryKeySelective{}", record);
+        return shopMapper.updateByPrimaryKey(record);
     }
 }

@@ -55,8 +55,7 @@ public class ShopController {
     public ResultBean updateByPrimaryKeySelective(@RequestBody @Valid Shop shop) {
         log.info("修改商户信息:{}", shop);
         this.bindShop(shop);
-        // TODO 报错
-        int ret = shopService.updateByPrimaryKey(shop);
+        int ret = shopService.updateByPrimaryKeySelective(shop);
         if (ret > 0) {
             return ResultBean.success("修改成功");
         }
