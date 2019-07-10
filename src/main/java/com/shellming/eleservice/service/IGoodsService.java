@@ -1,13 +1,13 @@
-package com.shellming.eleservice.mapper;
+package com.shellming.eleservice.service;
 
 import com.shellming.eleservice.entity.Goods;
-import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 import java.util.Map;
 
-@Mapper
-public interface GoodsMapper {
+public interface IGoodsService {
+    List list(Map map);
+
     int deleteByPrimaryKey(Integer id);
 
     int insert(Goods record);
@@ -19,6 +19,4 @@ public interface GoodsMapper {
     int updateByPrimaryKeySelective(Goods record);
 
     int updateByPrimaryKey(Goods record);
-
-    List list(Map map);
 }
