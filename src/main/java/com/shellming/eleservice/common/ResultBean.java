@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -47,6 +48,10 @@ public class ResultBean<T> {
 
     public static <T> ResultBean<T> unknownError(String msg) {
         return new ResultBean<>(UNKNOWN_ERROR, msg);
+    }
+
+    public Boolean isSuccess() {
+        return StringUtils.equals(ResultBean.SUCCESS, this.code);
     }
 
     public ResultBean(String code, String msg, T data) {
