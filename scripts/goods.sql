@@ -24,15 +24,15 @@ DROP TABLE IF EXISTS `goods`;
 CREATE TABLE `goods` (
                        `id` integer(5) COLLATE utf8_unicode_ci NOT NULL AUTO_INCREMENT COMMENT '商品ID',
                        `name` varchar(20) COLLATE utf8_unicode_ci NOT NULL COMMENT '商品名称',
-                       `remark` varchar(100) COLLATE utf8_unicode_ci NOT NULL COMMENT '描述',
+                       `remark` varchar(100) COLLATE utf8_unicode_ci COMMENT '描述',
                        `stock` integer(5) collate utf8_unicode_ci NOT NULL default 0 COMMENT '库存',
                        `price` integer(5) collate utf8_unicode_ci NOT NULL default 0 COMMENT '价格',
                        `sales` integer(5) collate utf8_unicode_ci NOT NULL default 0 COMMENT '销量',
                        `praise_rate` integer(3) collate utf8_unicode_ci NOT NULL default 0 COMMENT '好评率',
-                       `shop_id` varchar(20) COLLATE utf8_unicode_ci NOT NULL COMMENT '商家ID',
-                       `user_id` varchar(20) COLLATE utf8_unicode_ci NOT NULL COMMENT '用户ID',
-                       `status` varchar(20) COLLATE utf8_unicode_ci NOT NULL COMMENT '商品状态',
-                       `images` varchar(20) COLLATE utf8_unicode_ci NOT NULL COMMENT '商品状态',
+                       `shop_id` varchar(20) COLLATE utf8_unicode_ci COMMENT '商家ID',
+                       `user_id` varchar(20) COLLATE utf8_unicode_ci COMMENT '用户ID',
+                       `status` varchar(20) COLLATE utf8_unicode_ci COMMENT '商品状态',
+                       `images` varchar(500) COLLATE utf8_unicode_ci COMMENT '商品图片',
                        PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
