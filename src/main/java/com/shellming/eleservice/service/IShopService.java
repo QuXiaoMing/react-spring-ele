@@ -13,4 +13,10 @@ public interface IShopService {
     List search(Map map);
 
     int deleteByPrimaryKey(String id);
+
+    Shop selectByPrimaryKey(String id);
+
+    int updateByPrimaryKeySelective(Shop record);
+
+    int updateByPrimaryKey(Shop record);
 }

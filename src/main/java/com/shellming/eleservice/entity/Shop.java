@@ -6,62 +6,64 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
+
 @Data
 public class Shop {
     private String id;
 
     @NotEmpty(message = "名称不能为空")
-    private String name;
+    private String name = "";
 
     @NotEmpty(message = "联系电话不能为空")
-    private String phone;
+    private String phone = "";
 
-    private Double latitude;
+    private Double latitude = 0.01;
 
-    private Double longitude;
+    private Double longitude = 0.01;
 
     @NotEmpty(message = "门面地址不能为空")
-    private String address;
+    private String address = "";
 
     @NotEmpty(message = "分类不能为空")
-    private String category;
 
-    private String image_path;
+    private String category = "";
 
-    private Integer float_delivery_fee;
+    private String image_path = "";
 
-    private Integer float_minimum_order_amount;
+    private Integer float_delivery_fee = 0;
 
-    private String description;
+    private Integer float_minimum_order_amount = 0;
 
-    private String promotion_info;
+    private String description = "";
 
-    private Boolean is_premium;
+    private String promotion_info = "";
 
-    private Boolean delivery_mode;
+    private Boolean is_premium = false;
 
-    private Boolean is_new;
+    private Boolean delivery_mode = false;
 
-    private Boolean is_bao;
+    private Boolean is_new = false;
 
-    private Boolean is_zhun;
+    private Boolean is_bao = false;
 
-    private Boolean is_piao;
+    private Boolean is_zhun = false;
 
-    private Date createdAt;
+    private Boolean is_piao = false;
+
+    private Date createdAt = new Date();
 
     @NotNull(message = "startTime 不能为空")
-    private Date startTime;
+    private Date startTime = new Date();
 
     @NotNull(message = "endTime 不能为空")
     private Date endTime;
 
-    @NotNull(message = "endTime 不能为空")
-    private String business_license_image;
+    @NotNull(message = "business_license_image 不能为空")
+    private String business_license_image  = "";
 
 
     @NotEmpty(message = "catering_service_license_image 不能为空")
-    private String catering_service_license_image;
+    private String catering_service_license_image   = "";
 
-    private String activities;
+    private String activities  = "";
 }

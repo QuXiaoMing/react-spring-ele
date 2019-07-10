@@ -1,12 +1,14 @@
 package com.shellming.eleservice.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.shellming.eleservice.common.ResultBean;
+import com.shellming.eleservice.entity.Category;
 import com.shellming.eleservice.entity.Shop;
+import com.shellming.eleservice.service.impl.CategoryServiceImpl;
 import com.shellming.eleservice.service.impl.ShopServiceImpl;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -28,19 +30,51 @@ public class ShopController {
     @Autowired
     private ShopServiceImpl shopService;
 
+    @Autowired
+    private CategoryServiceImpl categoryService;
+
     @ApiOperation(value = "创建商户")
     @RequestMapping(value = "", method = RequestMethod.POST)
     public ResultBean create(@RequestBody @Valid Shop shop) {
+        // 绑定分类
+        this.bindShop(shop);
+
         shop.setId(UUID.randomUUID().toString());
         shop.setLatitude(12.12);
         shop.setLongitude(12.12);
         log.info("创建商户:{}", shop);
-        shop.setId(UUID.randomUUID().toString());
         int ret = shopService.create(shop);
         if (ret > 0) {
             return ResultBean.success("创建成功");
         }
         return ResultBean.fail("创建失败");
+    }
+
+    @ApiOperation(value = "修改商户信息")
+    @RequestMapping(value = "", method = RequestMethod.PUT)
+    public ResultBean updateByPrimaryKeySelective(@RequestBody @Valid Shop shop) {
+        log.info("修改商户信息:{}", shop);
+        this.bindShop(shop);
+        // TODO 报错
+        int ret = shopService.updateByPrimaryKey(shop);
+        if (ret > 0) {
+            return ResultBean.success("修改成功");
+        }
+        return ResultBean.fail("修改失败");
+    }
+
+    private void bindShop(Shop shop) {
+        try {
+            // 绑定分类
+            Integer categoryId = Integer.parseInt(shop.getCategory());
+            Category category = categoryService.selectByPrimaryKey(categoryId);
+            String categoryJsonString = JSON.toJSONString(category);
+            log.info("category:{}", categoryJsonString);
+            shop.setCategory(categoryJsonString);
+        } catch (NumberFormatException e) {
+            log.error("绑定分类失败{}", e);
+            e.printStackTrace();
+        }
     }
 
     @ApiOperation(value = "商户列表")
@@ -58,6 +92,17 @@ public class ShopController {
         return ResultBean.success(pageInfo);
     }
 
+
+    @ApiOperation(value = "商户详情")
+    @RequestMapping(value = "{id}", method = RequestMethod.GET)
+    public ResultBean list(@PathVariable("id") String id) {
+        log.info("商户详情:{}", id);
+        Shop shop = shopService.selectByPrimaryKey(id);
+        if (shop == null) {
+            return ResultBean.fail("店铺不存在");
+        }
+        return ResultBean.success(shop);
+    }
 
     @RequestMapping(value = "search", method = RequestMethod.GET)
     @ApiOperation("城市搜索")

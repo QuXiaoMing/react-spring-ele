@@ -11,6 +11,8 @@ spring:
         username: root
         password: ""
         driver-class-name: com.mysql.jdbc.Driver
+    jackson:
+      default-property-inclusion: non_null
 
 
 mybatis:

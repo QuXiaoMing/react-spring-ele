@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 public interface ICategoryService {
+    Category selectByPrimaryKey(Integer id);
+
     List list(Map map);
 
     List findByParentId(int parentId);

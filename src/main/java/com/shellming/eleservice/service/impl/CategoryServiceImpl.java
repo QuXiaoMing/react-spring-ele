@@ -15,6 +15,11 @@ public class CategoryServiceImpl implements ICategoryService {
     private CategoryMapper categoryMapper;
 
     @Override
+    public Category selectByPrimaryKey(Integer id) {
+        return  categoryMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
     public List list(Map map) {
         return categoryMapper.list(map);
     }

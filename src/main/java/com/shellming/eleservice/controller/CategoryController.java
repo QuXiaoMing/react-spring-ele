@@ -51,8 +51,8 @@ public class CategoryController {
     }
 
     @ApiOperation(value = "删除分类")
-    @RequestMapping(value = "", method = RequestMethod.DELETE)
-    public ResultBean create(@RequestBody Integer id) {
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public ResultBean create(@PathVariable("id") Integer id) {
         log.info("删除分类");
         int ret = categoryService.deleteByPrimaryKey(id);
         log.info("删除分类结果{}", ret);

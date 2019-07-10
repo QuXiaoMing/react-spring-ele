@@ -33,4 +33,19 @@ public class ShopServiceImpl implements IShopService {
     public int deleteByPrimaryKey(String id) {
         return shopMapper.deleteByPrimaryKey(id);
     }
+
+    @Override
+    public Shop selectByPrimaryKey(String id) {
+        return  shopMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public int updateByPrimaryKeySelective(Shop record) {
+        return updateByPrimaryKeySelective(record);
+    }
+
+    @Override
+    public int updateByPrimaryKey(Shop record) {
+        return updateByPrimaryKey(record);
+    }
 }
