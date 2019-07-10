@@ -24,6 +24,7 @@ DROP TABLE IF EXISTS `goods`;
 CREATE TABLE `goods` (
                        `id` integer(5) COLLATE utf8_unicode_ci NOT NULL AUTO_INCREMENT COMMENT '商品ID',
                        `name` varchar(20) COLLATE utf8_unicode_ci NOT NULL COMMENT '商品名称',
+                       `category`varchar(20) COLLATE utf8_unicode_ci NOT NULL COMMENT '商品分类',
                        `remark` varchar(100) COLLATE utf8_unicode_ci COMMENT '描述',
                        `stock` integer(5) collate utf8_unicode_ci NOT NULL default 0 COMMENT '库存',
                        `price` integer(5) collate utf8_unicode_ci NOT NULL default 0 COMMENT '价格',

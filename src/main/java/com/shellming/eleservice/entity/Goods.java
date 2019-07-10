@@ -29,4 +29,5 @@ public class Goods {
 
     private String images;
 
+    private String category;
 }
