@@ -45,8 +45,13 @@ public class FileUploadServiceImpl implements IFileUploadService {
             //  这里使用Apache的FileUtils方法来进行保存
             FileUtils.copyInputStreamToFile(myfiles.getInputStream(), new File(realPath, originalFilename));
             Map resMap = new HashMap();
-            resMap.put("filename", originalFilename);
-            resMap.put("path", basePath + "/static/image/" + originalFilename);
+            String downloadURL = basePath + "/static/image/" + originalFilename;
+
+            resMap.put("name", originalFilename);
+            resMap.put("state", "done");
+            resMap.put("downloadURL", downloadURL);
+            resMap.put("fileURL", downloadURL);
+            resMap.put("imgURL", downloadURL);
             resMap.put("relativePath", "/static/image/" + originalFilename);
             return ResultBean.success(resMap);
         }

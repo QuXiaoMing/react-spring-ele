@@ -31,14 +31,14 @@ public class FileUploadController {
 
     @ApiOperation(value = "上传")
     @RequestMapping(value = "", method = RequestMethod.POST)
-    public ResultBean uploadApk(MultipartFile[] files, HttpServletRequest request, HttpServletResponse response) throws Exception{
-        log.info("上传{}", files.length);
+    public ResultBean uploadApk(MultipartFile[] file, HttpServletRequest request, HttpServletResponse response) throws Exception{
+        log.info("上传{}", file.length);
         List result = new ArrayList();
         String path = request.getContextPath();
         String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path;
 
-        for (MultipartFile file : files) {
-            ResultBean ret = fileUploadService.upload(file, path, basePath);
+        for (MultipartFile fileItem : file) {
+            ResultBean ret = fileUploadService.upload(fileItem, path, basePath);
             if (ret.isSuccess()) {
                 Object data = ret.getData();
                 result.add(data);
