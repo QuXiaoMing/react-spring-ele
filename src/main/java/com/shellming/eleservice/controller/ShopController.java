@@ -8,10 +8,12 @@ import com.shellming.eleservice.entity.Category;
 import com.shellming.eleservice.entity.Shop;
 import com.shellming.eleservice.service.impl.CategoryServiceImpl;
 import com.shellming.eleservice.service.impl.ShopServiceImpl;
+import com.shellming.eleservice.vo.ShopVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,9 +38,6 @@ public class ShopController {
     @ApiOperation(value = "创建商户")
     @RequestMapping(value = "", method = RequestMethod.POST)
     public ResultBean create(@RequestBody @Valid Shop shop) {
-        // 绑定分类
-        this.bindShop(shop);
-
         shop.setId(UUID.randomUUID().toString());
         shop.setLatitude(12.12);
         shop.setLongitude(12.12);
@@ -54,7 +53,6 @@ public class ShopController {
     @RequestMapping(value = "", method = RequestMethod.PUT)
     public ResultBean updateByPrimaryKeySelective(@RequestBody @Valid Shop shop) {
         log.info("修改商户信息:{}", shop);
-        this.bindShop(shop);
         int ret = shopService.updateByPrimaryKeySelective(shop);
         if (ret > 0) {
             return ResultBean.success("修改成功");
@@ -100,7 +98,7 @@ public class ShopController {
         if (shop == null) {
             return ResultBean.fail("店铺不存在");
         }
-        return ResultBean.success(shop);
+        return ResultBean.success(convertShopToShopVo(shop));
     }
 
     @RequestMapping(value = "search", method = RequestMethod.GET)
@@ -126,5 +124,16 @@ public class ShopController {
             return ResultBean.success("删除成功");
         }
         return ResultBean.fail("删除失败");
+    }
+
+    public ShopVo convertShopToShopVo(Shop shop) {
+        ShopVo shopVo = new ShopVo();
+        BeanUtils.copyProperties(shop, shopVo);
+
+        Integer categoryId = Integer.parseInt(shop.getCategory());
+        Category category = categoryService.selectByPrimaryKey(categoryId);
+        shopVo.setCategoryData(category);
+
+        return shopVo;
     }
 }

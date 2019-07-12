@@ -5,11 +5,13 @@ import com.github.pagehelper.PageInfo;
 import com.shellming.eleservice.common.ResultBean;
 import com.shellming.eleservice.entity.User;
 import com.shellming.eleservice.service.IUserService;
+import com.shellming.eleservice.vo.UserVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,7 +34,7 @@ public class UserController{
         User user = userService.getUserById(id);
         Log.info("获取用户信息{}", user);
         if (user != null) {
-            return ResultBean.success(user);
+            return ResultBean.success(convertUserToVo(user));
         }
         return ResultBean.fail("用户不存在");
     }
@@ -47,8 +49,10 @@ public class UserController{
         map.put("pageSize", pageSize);
 
         List<User> userList = userService.list(map);
-        PageInfo<User> result = new PageInfo<>(userList);
-        Log.info("获取用户列表{}", userList);
+        ArrayList arrayList = new ArrayList();
+        userList.forEach(user -> arrayList.add(convertUserToVo(user)));
+        PageInfo<User> result = new PageInfo<>(arrayList);
+        Log.info("获取用户列表{}", arrayList);
         return ResultBean.success(result);
     }
 
@@ -97,5 +101,11 @@ public class UserController{
             return ResultBean.success("修改成功");
         }
         return ResultBean.fail("修改失败");
+    }
+
+    public UserVo convertUserToVo(User user) {
+        UserVo userVo = new UserVo();
+        BeanUtils.copyProperties(user, userVo);
+        return userVo;
     }
 }
