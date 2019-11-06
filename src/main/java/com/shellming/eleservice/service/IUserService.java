@@ -14,4 +14,6 @@ public interface IUserService {
     User getUserByUserName(String userName);
 
     int updateByPrimaryKeySelective(User user);
+
+    int deleteByPrimaryKey(String id);
 }

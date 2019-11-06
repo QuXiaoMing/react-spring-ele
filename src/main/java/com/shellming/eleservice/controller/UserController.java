@@ -90,6 +90,17 @@ public class UserController{
         throw new Exception("设置失败");
     }
 
+    @ApiOperation(value = "删除用户", notes = "删除用户")
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public ResultBean deleteUser(@PathVariable("id") String id) {
+        int ret = userService.deleteByPrimaryKey(id);
+        if (ret > 0) {
+            return ResultBean.success(ret);
+        }
+        return  ResultBean.fail("删除失败");
+    }
+
+
     @ApiOperation(value = "修改用户信息")
     @RequestMapping(value = "", method = RequestMethod.PUT)
     public ResultBean setUserInfo(@RequestBody User user) throws Exception {
